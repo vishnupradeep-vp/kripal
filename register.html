@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account | SQL Migrator</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#050b1f;
+    padding:20px;
+}
+
+.auth-card{
+    width:100%;
+    max-width:500px;
+    background:#08122e;
+    border-radius:30px;
+    padding:40px;
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+h1{
+    color:white;
+    font-size:48px;
+    font-weight:800;
+    margin-bottom:15px;
+    line-height:1;
+}
+
+.subtitle{
+    color:#a7afc5;
+    font-size:18px;
+    margin-bottom:40px;
+}
+
+.form-grid{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.input-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.input-group label{
+    color:white;
+    font-size:18px;
+    font-weight:600;
+    margin-bottom:10px;
+}
+
+.input-group input{
+    width:100%;
+    height:58px;
+    padding:0 18px;
+    border:none;
+    border-radius:16px;
+    background:#1d2744;
+    color:white;
+    font-size:16px;
+}
+
+.input-group input::placeholder{
+    color:#a0a7bc;
+}
+
+.input-group input:focus{
+    outline:none;
+    border:1px solid #6f63ff;
+}
+
+.radio-group{
+    display:flex;
+    gap:15px;
+    border:none;
+}
+
+.radio-group label{
+    flex:1;
+    height:60px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    background:#1d2744;
+    border-radius:16px;
+    color:white;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.button-primary{
+    height:60px;
+    border:none;
+    border-radius:16px;
+    background:linear-gradient(90deg,#7266ff,#5348ff);
+    color:white;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.button-primary:hover{
+    opacity:.95;
+}
+
+.auth-footer{
+    margin-top:30px;
+    text-align:center;
+}
+
+.auth-footer a{
+    color:#7266ff;
+    text-decoration:none;
+    font-size:16px;
+    font-weight:700;
+}
+
+.auth-note{
+    margin-top:12px;
+    color:#9aa2b8;
+    font-size:14px;
+}
+
+#auth-message{
+    color:#ffcc00;
+    text-align:center;
+    margin-bottom:15px;
+}
+
+@media(max-width:768px){
+
+    .auth-card{
+        padding:30px;
+    }
+
+    h1{
+        font-size:38px;
+    }
+
+    .subtitle{
+        font-size:16px;
+    }
+
+    .radio-group{
+        flex-direction:column;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<main class="auth-card">
+
+    <h1>Create Account</h1>
+
+    <p class="subtitle">
+        Register for secure access to the SQL Migrator platform.
+    </p>
+
+    <div id="auth-message"></div>
+
+    <form id="register-form" class="form-grid">
+
+        <div class="input-group">
+            <label for="fullname">Full Name</label>
+            <input id="fullname" type="text" placeholder="Jane Doe" required>
+        </div>
+
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@example.com" required>
+        </div>
+
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" placeholder="••••••••" required>
+        </div>
+
+        <div class="input-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input id="confirmPassword" type="password" placeholder="••••••••" required>
+        </div>
+
+        <fieldset class="radio-group">
+            <label>
+                <input type="radio" name="role" value="User" checked>
+                User
+            </label>
+
+            <label>
+                <input type="radio" name="role" value="Admin">
+                Admin
+            </label>
+        </fieldset>
+
+        <button type="submit" class="button-primary">
+            REGISTER
+        </button>
+
+    </form>
+
+    <div class="auth-footer">
+        <a href="login.html">Back to Login</a>
+
+        <p class="auth-note">
+            Registration is available for users and admins.
+        </p>
+    </div>
+
+</main>
+
+<script>
+  document.getElementById('register-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const messageDiv = document.getElementById('auth-message');
+    
+    if (password !== confirmPassword) {
+      messageDiv.textContent = ' Password Mismatch! Please try again.';
+      messageDiv.style.color = '#FF6B6B';
+      messageDiv.style.fontSize = '16px';
+      messageDiv.style.marginBottom = '15px';
+    } else {
+      messageDiv.textContent = '✓ Registration Successful! Account created successfully.';
+      messageDiv.style.color = '#4CAF50';
+      messageDiv.style.fontSize = '16px';
+      messageDiv.style.marginBottom = '15px';
+      
+      // Clear form after successful registration
+      setTimeout(() => {
+        this.reset();
+        messageDiv.textContent = '';
+      }, 2000);
+    }
+  });
+</script>
+
+</body>
+</html>
